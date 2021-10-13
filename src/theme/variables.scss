@@ -3,13 +3,15 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-font-family: 'Ubuntu', sans-serif;
+
   /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary: #22577A;
+  --ion-color-primary-rgb: 34,87,122;
   --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #1e4d6b;
+  --ion-color-primary-tint: #386887;
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
