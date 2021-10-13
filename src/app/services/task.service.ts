@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { Task } from '../models/task';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private _tasks: Task[] = [
-    { id: 1, name: 'Comprar pão', deadline: null, isDone: false },
-    {
-      id: 2,
-      name: 'Estudar para a prova de ES',
-      deadline: new Date(),
-      isDone: true,
-    },
-  ];
+  private readonly STORAGE_KEY: string = 'MY-TASKS';
+  private _tasks: Task[] = [];
 
-  constructor() {}
+  constructor(private _storage: Storage) {
+    this.init();
+  }
+
+  async init(): Promise<void> {
+    await this._storage.create();
+    this._tasks = (await this._storage.get(this.STORAGE_KEY)) || [];
+  }
+
+  async store(): Promise<void> {
+    await this._storage.set(this.STORAGE_KEY, this._tasks);
+  }
 
   async getAll(): Promise<Task[]> {
     return [...this._tasks];
@@ -24,6 +29,7 @@ export class TaskService {
   async add(task: Task): Promise<void> {
     task.id = Date.now();
     this._tasks.push(task);
+    await this.store();
   }
 
   async update(task: Task): Promise<void> {
@@ -35,6 +41,7 @@ export class TaskService {
 
     if (index >= 0) {
       this._tasks[index] = task;
+      await this.store();
     }
   }
 
@@ -43,6 +50,7 @@ export class TaskService {
 
     if (index >= 0) {
       this._tasks.splice(index, 1);
+      await this.store();
     }
   }
 }
