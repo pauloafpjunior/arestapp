@@ -10,3 +10,14 @@
   text-transform: uppercase;
   letter-spacing: 0.6rem;
 }
+
+.container {
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+ion-content {
+  --background: var(--ion-color-light);  
+}
