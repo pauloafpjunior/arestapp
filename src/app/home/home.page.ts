@@ -73,6 +73,33 @@ export class HomePage {
     await alertInput.present();
   }
 
+  async agendarTarefa(task: Task): Promise<void> {
+    const alertInput = await this._alertCtrl.create({
+      header: 'Agendar tarefa',
+      inputs: [
+        {
+          name: 'deadline',
+          type: 'date',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Salvar',
+          handler: async (data) => {
+            task.deadline = data.deadline;
+            await this._taskService.update(task);
+            this.loadTasks();
+          },
+        },
+      ],
+    });
+    await alertInput.present();
+  }
+
   async removeTask(task: Task): Promise<void> {
     await this._taskService.remove(task.id);
     this.loadTasks();
@@ -90,11 +117,12 @@ export class HomePage {
         {
           icon: 'calendar-number-outline',
           text: 'Agendar',
+          handler: () => this.agendarTarefa(task)
         },
         {
           icon: 'trash-outline',
           text: 'Remover',
-          handler: () => this.removeTask(task)
+          handler: () => this.removeTask(task),
         },
       ],
     });

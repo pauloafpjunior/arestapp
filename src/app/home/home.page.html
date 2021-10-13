@@ -32,7 +32,7 @@
           </ion-label>
 
           <ion-buttons slot="end">
-            <ion-chip color="primary" slot="end" *ngIf="task.deadline">
+            <ion-chip color="primary" slot="end" *ngIf="task.deadline" (click)="agendarTarefa(task)">
               <ion-label>{{ task.deadline | date:'dd/MM' }}</ion-label>
             </ion-chip>
 
