@@ -1,6 +1,6 @@
 # Tarefas
 
-Um aplicativo web simples para gerenciar sua lista de tarefas.
+Um aplicativo Web simples para gerenciamento de lista de tarefas, desenvolvido para o minicurso oferecido na CompWeek, do DCC/UFLA.
 
 ![Demonstração de uso do aplicativo Tarefas](demo.gif "Demonstração")
 
