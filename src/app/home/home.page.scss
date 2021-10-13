@@ -18,6 +18,10 @@
   border-radius: 20px;
 }
 
+.task-done {
+  text-decoration: line-through;
+}
+
 ion-content {
   --background: var(--ion-color-light);  
 }
