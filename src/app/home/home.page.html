@@ -13,40 +13,55 @@
             </ion-button>
           </ion-buttons>
 
-          <ion-input 
-            clearInput 
+          <ion-input
+            clearInput
             placeholder="Ex. Tomar vacina"
             [(ngModel)]="taskName"
             (keyup.enter)="addTask()"
-            ></ion-input>
+          ></ion-input>
         </ion-item>
 
         <ion-list class="container" lines="none">
           <ion-item *ngIf="tasks.length === 0">
-            <ion-label class="ion-text-center">Oba, minha lista de tarefas está vazia!</ion-label>
+            <ion-label class="ion-text-center"
+              >Oba, minha lista de tarefas está vazia!</ion-label
+            >
           </ion-item>
 
           <ion-item class="clickable-item" *ngFor="let task of tasks">
-            <ion-label class="ion-text-wrap" [ngClass]="{'task-done' : task.isDone}" (click)="toggleTask(task)">
+            <ion-label
+              class="ion-text-wrap"
+              [ngClass]="{'task-done' : task.isDone}"
+              (click)="toggleTask(task)"
+            >
               {{ task.name }}
-          </ion-label>
+            </ion-label>
 
-          <ion-buttons slot="end">
-            <ion-chip color="primary" slot="end" *ngIf="task.deadline" (click)="agendarTarefa(task)">
-              <ion-label>{{ task.deadline | date:'dd/MM' }}</ion-label>
-            </ion-chip>
+            <ion-buttons slot="end">
+              <ion-chip
+                color="primary"
+                slot="end"
+                *ngIf="task.deadline"
+                (click)="agendarTarefa(task)"
+              >
+                <ion-label>{{ task.deadline | date:'dd/MM' }}</ion-label>
+              </ion-chip>
 
-            <ion-button (click)="showMenu(task)">
-              <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-
-
+              <ion-button (click)="showMenu(task)">
+                <ion-icon
+                  slot="icon-only"
+                  name="ellipsis-vertical-outline"
+                ></ion-icon>
+              </ion-button>
+            </ion-buttons>
           </ion-item>
         </ion-list>
 
         <ion-item color="light" lines="none">
-          <ion-label class="ion-text-center">© {{ today | date:'yyyy' }} Tarefas - v1.0 | Sobre</ion-label>
+          <ion-label class="ion-text-center"
+            >© {{ today | date:'yyyy' }} Tarefas - v1.0 |
+            <a href="/about">Sobre</a></ion-label
+          >
         </ion-item>
       </ion-col>
     </ion-row>
