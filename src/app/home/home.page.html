@@ -22,13 +22,20 @@
           </ion-item>
 
           <ion-item *ngFor="let task of tasks">
-            <ion-label [ngClass]="{'task-done' : task.isDone}">
+            <ion-label class="ion-text-wrap" [ngClass]="{'task-done' : task.isDone}">
               {{ task.name }}
           </ion-label>
 
-          <ion-chip color="primary" slot="end" *ngIf="task.deadline">
-            <ion-label>{{ task.deadline | date:'dd/MM' }}</ion-label>
-          </ion-chip>
+          <ion-buttons slot="end">
+            <ion-chip color="primary" slot="end" *ngIf="task.deadline">
+              <ion-label>{{ task.deadline | date:'dd/MM' }}</ion-label>
+            </ion-chip>
+
+            <ion-button>
+              <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
 
           </ion-item>
         </ion-list>
