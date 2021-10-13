@@ -135,4 +135,8 @@ export class HomePage {
 
     await actionSheet.present();
   }
+
+  get today(): Date {
+    return new Date();
+  }
 }
