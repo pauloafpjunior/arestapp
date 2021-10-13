@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Task } from '../models/task';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  tasks: string[] = [];
+  tasks: Task[] = [
+    { id: 1, name: 'Fazer compras', deadline: null, isDone: false },
+    { id: 2, name: 'Estudar para a prova de ES', deadline: new Date(), isDone: true },
+  ];
 
   constructor() {}
 
