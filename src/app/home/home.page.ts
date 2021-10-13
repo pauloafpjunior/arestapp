@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { Task } from '../models/task';
 import { TaskService } from '../services/task.service';
 
@@ -9,14 +9,14 @@ import { TaskService } from '../services/task.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
   tasks: Task[] = [];
   taskName: string = '';
 
   constructor(
     private _taskService: TaskService,
-    private _actionSheetCtrl: ActionSheetController) {
-  }
+    private _actionSheetCtrl: ActionSheetController,
+    private _alertCtrl: AlertController
+  ) {}
 
   ionViewDidEnter() {
     this.loadTasks();
@@ -33,12 +33,44 @@ export class HomePage {
 
     const task: Task = {
       name: this.taskName,
-      isDone: false
-    } 
+      isDone: false,
+    };
 
     await this._taskService.add(task);
     this.taskName = '';
     this.loadTasks();
+  }
+
+  async editTaskName(task: Task): Promise<void> {
+    const alertInput = await this._alertCtrl.create({
+      header: 'Editar tarefa',
+      inputs: [
+        {
+          name: 'taskName',
+          type: 'text',
+          value: task.name,
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Salvar',
+          handler: async (data) => {
+            if (!data.taskName || data.taskName.trim().length === 0) {
+              return;
+            }
+
+            task.name = data.taskName;
+            await this._taskService.update(task);
+            this.loadTasks();
+          },
+        },
+      ],
+    });
+    await alertInput.present();
   }
 
   async showMenu(task: Task) {
@@ -47,21 +79,20 @@ export class HomePage {
       buttons: [
         {
           icon: 'create-outline',
-          text: 'Editar'
+          text: 'Editar',
+          handler: () => this.editTaskName(task),
         },
         {
           icon: 'calendar-number-outline',
-          text: 'Agendar'
+          text: 'Agendar',
         },
         {
           icon: 'trash-outline',
-          text: 'Remover'
+          text: 'Remover',
         },
-
-      ]
+      ],
     });
 
     await actionSheet.present();
   }
-
 }
