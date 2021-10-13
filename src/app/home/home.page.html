@@ -25,6 +25,11 @@
             <ion-label [ngClass]="{'task-done' : task.isDone}">
               {{ task.name }}
           </ion-label>
+
+          <ion-chip color="primary" slot="end" *ngIf="task.deadline">
+            <ion-label>{{ task.deadline | date:'dd/MM' }}</ion-label>
+          </ion-chip>
+
           </ion-item>
         </ion-list>
       </ion-col>
