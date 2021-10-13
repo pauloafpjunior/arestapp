@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Task } from '../models/task';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,17 @@ import { Task } from '../models/task';
 })
 export class HomePage {
 
-  tasks: Task[] = [
-    { id: 1, name: 'Fazer compras', deadline: null, isDone: false },
-    { id: 2, name: 'Estudar para a prova de ES', deadline: new Date(), isDone: true },
-  ];
+  tasks: Task[] = [];
 
-  constructor() {}
+  constructor(private _taskService: TaskService) {
+  }
+
+  ionViewDidEnter() {
+    this.loadTasks();
+  }
+
+  async loadTasks(): Promise<void> {
+    this.tasks = await this._taskService.getAll();
+  }
 
 }
