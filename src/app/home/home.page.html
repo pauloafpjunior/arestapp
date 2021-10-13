@@ -36,7 +36,7 @@
               <ion-label>{{ task.deadline | date:'dd/MM' }}</ion-label>
             </ion-chip>
 
-            <ion-button>
+            <ion-button (click)="showMenu(task)">
               <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
             </ion-button>
           </ion-buttons>

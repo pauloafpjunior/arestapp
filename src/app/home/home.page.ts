@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActionSheetController } from '@ionic/angular';
 import { Task } from '../models/task';
 import { TaskService } from '../services/task.service';
 
@@ -12,7 +13,9 @@ export class HomePage {
   tasks: Task[] = [];
   taskName: string = '';
 
-  constructor(private _taskService: TaskService) {
+  constructor(
+    private _taskService: TaskService,
+    private _actionSheetCtrl: ActionSheetController) {
   }
 
   ionViewDidEnter() {
@@ -36,6 +39,29 @@ export class HomePage {
     await this._taskService.add(task);
     this.taskName = '';
     this.loadTasks();
+  }
+
+  async showMenu(task: Task) {
+    const actionSheet = await this._actionSheetCtrl.create({
+      header: 'Menu',
+      buttons: [
+        {
+          icon: 'create-outline',
+          text: 'Editar'
+        },
+        {
+          icon: 'calendar-number-outline',
+          text: 'Agendar'
+        },
+        {
+          icon: 'trash-outline',
+          text: 'Remover'
+        },
+
+      ]
+    });
+
+    await actionSheet.present();
   }
 
 }
