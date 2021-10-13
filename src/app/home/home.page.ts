@@ -73,6 +73,11 @@ export class HomePage {
     await alertInput.present();
   }
 
+  async removeTask(task: Task): Promise<void> {
+    await this._taskService.remove(task.id);
+    this.loadTasks();
+  }
+
   async showMenu(task: Task) {
     const actionSheet = await this._actionSheetCtrl.create({
       header: 'Menu',
@@ -89,6 +94,7 @@ export class HomePage {
         {
           icon: 'trash-outline',
           text: 'Remover',
+          handler: () => this.removeTask(task)
         },
       ],
     });

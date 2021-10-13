@@ -27,7 +27,7 @@ export class TaskService {
   }
 
   async update(task: Task): Promise<void> {
-    if (!task.id) {
+    if (!task) {
       return;
     }
 
@@ -35,6 +35,14 @@ export class TaskService {
 
     if (index >= 0) {
       this._tasks[index] = task;
+    }
+  }
+
+  async remove(taskId: number): Promise<void> {
+    const index = this._tasks.findIndex((item) => item.id === taskId);
+
+    if (index >= 0) {
+      this._tasks.splice(index, 1);
     }
   }
 }
