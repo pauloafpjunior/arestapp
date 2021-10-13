@@ -16,4 +16,9 @@ export class TaskService {
   async getAll(): Promise<Task[]> {
     return [...this._tasks];
   }
+
+  async add(task: Task): Promise<void> {
+    task.id = Date.now();
+    this._tasks.push(task);
+  }
 }
