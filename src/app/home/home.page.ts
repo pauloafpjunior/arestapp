@@ -41,6 +41,12 @@ export class HomePage {
     this.loadTasks();
   }
 
+  async toggleTask(task: Task): Promise<void> {
+    task.isDone = !task.isDone;
+    await this._taskService.update(task);
+    this.loadTasks();
+  }
+
   async editTaskName(task: Task): Promise<void> {
     const alertInput = await this._alertCtrl.create({
       header: 'Editar tarefa',

@@ -26,8 +26,8 @@
             <ion-label class="ion-text-center">Oba, minha lista de tarefas está vazia!</ion-label>
           </ion-item>
 
-          <ion-item *ngFor="let task of tasks">
-            <ion-label class="ion-text-wrap" [ngClass]="{'task-done' : task.isDone}">
+          <ion-item class="clickable-item" *ngFor="let task of tasks">
+            <ion-label class="ion-text-wrap" [ngClass]="{'task-done' : task.isDone}" (click)="toggleTask(task)">
               {{ task.name }}
           </ion-label>
 
