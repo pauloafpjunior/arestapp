@@ -7,41 +7,38 @@ import { Task } from '../models/task';
 })
 export class TaskService {
   private readonly STORAGE_KEY: string = 'MY-TASKS';
-  private _tasks: Task[] = [];
+  private _tasks: Task[] = null;
 
-  constructor(private _storage: Storage) {
-    this.init();
-  }
-
-  async init(): Promise<void> {
-    await this._storage.create();
-    this._tasks = (await this._storage.get(this.STORAGE_KEY)) || [];
-  }
+  constructor(private _storage: Storage) {}
 
   async store(): Promise<void> {
-    await this._storage.set(this.STORAGE_KEY, this._tasks);
+    await this._storage?.set(this.STORAGE_KEY, this._tasks);
   }
 
   async getAll(): Promise<Task[]> {
+    if (!this._tasks) {
+      await this._storage.create();
+      this._tasks = (await this._storage.get(this.STORAGE_KEY)) || [];
+    }
     return [...this._tasks];
   }
 
   async add(task: Task): Promise<void> {
-    task.id = Date.now();
-    this._tasks.push(task);
-    await this.store();
+    if (this.validate(task)) {
+      task.id = Date.now();
+      this._tasks.push(task);
+      await this.store();
+    }
   }
 
   async update(task: Task): Promise<void> {
-    if (!task) {
-      return;
-    }
+    if (this.validate(task)) {
+      const index = this._tasks.findIndex((item) => item.id === task.id);
 
-    const index = this._tasks.findIndex((item) => item.id === task.id);
-
-    if (index >= 0) {
-      this._tasks[index] = task;
-      await this.store();
+      if (index >= 0) {
+        this._tasks[index] = task;
+        await this.store();
+      }
     }
   }
 
@@ -52,5 +49,13 @@ export class TaskService {
       this._tasks.splice(index, 1);
       await this.store();
     }
+  }
+
+  private validate(task: Task): boolean {
+    if (!task.name || task.name.trim().length === 0) {
+      return false;
+    }
+
+    return true;
   }
 }

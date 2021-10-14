@@ -1,52 +1,58 @@
 <ion-content>
-  <app-header title="Sobre"></app-header>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size-lg="6" offset-lg="3">
+        <app-header title="Sobre"></app-header>
 
-  <ion-item lines="none" color="light">
-    <ion-back-button defaultHref="home"></ion-back-button>
-  </ion-item>
+        <ion-item lines="none" color="light">
+          <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-item>
 
-  <ion-item class="ion-align-items-center container" lines="none">
-    <ion-icon slot="start" name="information-outline"></ion-icon>
+        <ion-item class="ion-align-items-center container" lines="none">
+          <ion-icon slot="start" name="information-outline"></ion-icon>
 
-    <ion-label class="ion-text-wrap">
-      <h2>
-        <strong>Tarefas</strong> é um aplicativo web simples para gerenciar sua
-        lista de tarefas.
-      </h2>
-    </ion-label>
-  </ion-item>
+          <ion-label class="ion-text-wrap">
+            <h2>
+              <strong>Tarefas</strong> é um aplicativo web simples para
+              gerenciar sua lista de tarefas.
+            </h2>
+          </ion-label>
+        </ion-item>
 
-  <ion-item class="ion-align-items-center container" lines="none">
-    <ion-icon slot="start" name="logo-github"></ion-icon>
+        <ion-item class="ion-align-items-center container" lines="none">
+          <ion-icon slot="start" name="logo-github"></ion-icon>
 
-    <ion-label class="ion-text-wrap">
-      <a href="https://github.com/dcc-ufla/tarefas" target="_blank"
-        >Código fonte</a
-      >
-    </ion-label>
-  </ion-item>
+          <ion-label class="ion-text-wrap">
+            <a href="https://github.com/dcc-ufla/tarefas" target="_blank"
+              >Código fonte</a
+            >
+          </ion-label>
+        </ion-item>
 
-  <ion-list class="container" lines="none">
-    <ion-item-divider>
-      <ion-label>Desenvolvedores</ion-label>
-    </ion-item-divider>
+        <ion-list class="container" lines="none">
+          <ion-item-divider>
+            <ion-label>Desenvolvedores</ion-label>
+          </ion-item-divider>
 
-    <ion-item>
-      <ion-avatar slot="start">
-        <ion-img
-          src="https://avatars.githubusercontent.com/u/81873228?v=4"
-        ></ion-img>
-      </ion-avatar>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-img
+                src="https://avatars.githubusercontent.com/u/81873228?v=4"
+              ></ion-img>
+            </ion-avatar>
 
-      <ion-label>
-        <h2>
-          <a href="https://github.com/paulojunior-ufla" target="_blank"
-            >Paulo Júnior</a
-          >
-        </h2>
+            <ion-label>
+              <h2>
+                <a href="https://github.com/paulojunior-ufla" target="_blank"
+                  >Paulo Júnior</a
+                >
+              </h2>
 
-        <p>UFLA</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+              <p>UFLA</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

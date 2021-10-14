@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { Task } from '../models/task';
 import { TaskService } from '../services/task.service';
@@ -8,7 +8,7 @@ import { TaskService } from '../services/task.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   tasks: Task[] = [];
   taskName: string = '';
 
@@ -18,7 +18,7 @@ export class HomePage {
     private _alertCtrl: AlertController
   ) {}
 
-  ionViewDidEnter() {
+  ngOnInit() {
     this.loadTasks();
   }
 
@@ -27,10 +27,6 @@ export class HomePage {
   }
 
   async addTask(): Promise<void> {
-    if (!this.taskName || this.taskName.trim().length === 0) {
-      return;
-    }
-
     const task: Task = {
       name: this.taskName,
       isDone: false,
@@ -65,10 +61,6 @@ export class HomePage {
         {
           text: 'Salvar',
           handler: async (data) => {
-            if (!data.taskName || data.taskName.trim().length === 0) {
-              return;
-            }
-
             task.name = data.taskName;
             await this._taskService.update(task);
             this.loadTasks();
@@ -79,7 +71,7 @@ export class HomePage {
     await alertInput.present();
   }
 
-  async agendarTarefa(task: Task): Promise<void> {
+  async scheduleTask(task: Task): Promise<void> {
     const alertInput = await this._alertCtrl.create({
       header: 'Agendar tarefa',
       inputs: [
@@ -123,7 +115,7 @@ export class HomePage {
         {
           icon: 'calendar-number-outline',
           text: 'Agendar',
-          handler: () => this.agendarTarefa(task)
+          handler: () => this.scheduleTask(task),
         },
         {
           icon: 'trash-outline',

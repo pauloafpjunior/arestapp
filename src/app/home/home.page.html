@@ -40,7 +40,7 @@
                 color="primary"
                 slot="end"
                 *ngIf="task.deadline"
-                (click)="agendarTarefa(task)"
+                (click)="scheduleTask(task)"
               >
                 <ion-label>{{ task.deadline | date:'dd/MM' }}</ion-label>
               </ion-chip>
@@ -57,7 +57,7 @@
 
         <ion-item color="light" lines="none">
           <ion-label class="ion-text-center"
-            >© {{ today | date:'yyyy' }} Tarefas - v1.0 |
+            >© {{ today | date:'yyyy' }} Tarefas - v2.0 |
             <a href="/about">Sobre</a></ion-label
           >
         </ion-item>
