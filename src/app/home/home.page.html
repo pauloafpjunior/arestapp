@@ -13,6 +13,7 @@
 
           <ion-input
             clearInput
+            #taskInput
             placeholder="Ex. Tomar vacina"
             [(ngModel)]="taskName"
             (keyup.enter)="addTask()"

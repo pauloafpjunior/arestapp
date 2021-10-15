@@ -20,11 +20,11 @@ export class TaskService {
       await this._storage.create();
       this._tasks = (await this._storage.get(this.STORAGE_KEY)) || [];
     }
-    return [...this._tasks];
+    return this._tasks;
   }
 
   async add(task: Task): Promise<void> {
-    if (this.validate(task)) {
+    if (this.validateTask(task)) {
       task.id = Date.now();
       this._tasks.push(task);
       await this.store();
@@ -32,7 +32,10 @@ export class TaskService {
   }
 
   async update(task: Task): Promise<void> {
-    if (this.validate(task)) {
+    console.log(this._tasks)
+
+
+    if (this.validateTask(task)) {
       const index = this._tasks.findIndex((item) => item.id === task.id);
 
       if (index >= 0) {
@@ -40,6 +43,9 @@ export class TaskService {
         await this.store();
       }
     }
+
+    console.log(this._tasks)
+
   }
 
   async remove(taskId: number): Promise<void> {
@@ -51,11 +57,7 @@ export class TaskService {
     }
   }
 
-  private validate(task: Task): boolean {
-    if (!task.name || task.name.trim().length === 0) {
-      return false;
-    }
-
-    return true;
+  private validateTask(task: Task): boolean {
+    return task?.name.trim().length > 0;
   }
 }

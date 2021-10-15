@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, AlertController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ActionSheetController,
+  AlertController,
+  IonInput,
+} from '@ionic/angular';
 import { Task } from '../models/task';
 import { TaskService } from '../services/task.service';
 
@@ -9,6 +13,8 @@ import { TaskService } from '../services/task.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  @ViewChild(IonInput) taskInput: IonInput;
+
   tasks: Task[] = [];
   taskName: string = '';
 
@@ -17,6 +23,10 @@ export class HomePage implements OnInit {
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController
   ) {}
+
+  ionViewDidEnter(): void {
+    this.taskInput.setFocus();
+  }
 
   ngOnInit() {
     this.loadTasks();
@@ -35,6 +45,7 @@ export class HomePage implements OnInit {
     await this._taskService.add(task);
     this.taskName = '';
     this.loadTasks();
+    this.taskInput.setFocus();
   }
 
   async toggleTask(task: Task): Promise<void> {
@@ -61,8 +72,8 @@ export class HomePage implements OnInit {
         {
           text: 'Salvar',
           handler: async (data) => {
-            task.name = data.taskName;
-            await this._taskService.update(task);
+            const updatedTask = { ...task, name: data.taskName };
+            await this._taskService.update(updatedTask);
             this.loadTasks();
           },
         },
@@ -88,8 +99,8 @@ export class HomePage implements OnInit {
         {
           text: 'Salvar',
           handler: async (data) => {
-            task.deadline = data.deadline;
-            await this._taskService.update(task);
+            const updatedTask = { ...task, deadline: data.deadline };
+            await this._taskService.update(updatedTask);
             this.loadTasks();
           },
         },
