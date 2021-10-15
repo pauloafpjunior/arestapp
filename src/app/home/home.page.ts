@@ -13,7 +13,7 @@ import { TaskService } from '../services/task.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  @ViewChild(IonInput) taskInput: IonInput;
+  @ViewChild('autofocus', { static: false }) inputTask: IonInput;
 
   tasks: Task[] = [];
   taskName: string = '';
@@ -24,12 +24,14 @@ export class HomePage implements OnInit {
     private _alertCtrl: AlertController
   ) {}
 
-  ionViewDidEnter(): void {
-    this.taskInput.setFocus();
-  }
-
   ngOnInit() {
     this.loadTasks();
+  }
+
+  setFocus() {
+    setTimeout(() => {
+      this.inputTask.setFocus();
+    }, 300);
   }
 
   async loadTasks(): Promise<void> {
@@ -45,7 +47,7 @@ export class HomePage implements OnInit {
     await this._taskService.add(task);
     this.taskName = '';
     this.loadTasks();
-    this.taskInput.setFocus();
+    this.setFocus();
   }
 
   async toggleTask(task: Task): Promise<void> {
