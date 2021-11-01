@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Input() title: string = 'Tarefas';
+  @Input() title: string = 'My Tasks';
 }

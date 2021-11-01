@@ -1,22 +1,20 @@
-# Tarefas
+# ARESTApp
 
-Um aplicativo Web simples para gerenciamento de lista de tarefas, desenvolvido para o minicurso oferecido na CompWeek, do DCC/UFLA.
+ARESTApp (A Really Simple Todo App) helps you to manage your tasks list.
 
-![Demonstração de uso do aplicativo Tarefas](demo.gif "Demonstração")
+# How to use it?
 
-# Como usar?
+Please access https://arestapp.web.app/home
 
-Acesse https://tarefas-fc129.web.app/home
+# How to install it?
 
-# Como instalar?
+Please clone this repository.
 
-Clone este repositório.
-
-Entre na pasta do projeto e execute o comando abaixo para instalar as dependências do projeto:
+Access the project folder and execute the commando bellow to install the project dependencies:
 
 `npm install`
 
-Para executar a aplicação, use o comando:
+To run the application, please use the commando:
 
 `ionic serve`
 

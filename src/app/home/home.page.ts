@@ -58,7 +58,7 @@ export class HomePage implements OnInit {
 
   async editTaskName(task: Task): Promise<void> {
     const alertInput = await this._alertCtrl.create({
-      header: 'Editar tarefa',
+      header: 'Edit task',
       inputs: [
         {
           name: 'taskName',
@@ -68,11 +68,11 @@ export class HomePage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Cancel',
           role: 'cancel',
         },
         {
-          text: 'Salvar',
+          text: 'Save',
           handler: async (data) => {
             const updatedTask = { ...task, name: data.taskName };
             await this._taskService.update(updatedTask);
@@ -86,7 +86,7 @@ export class HomePage implements OnInit {
 
   async scheduleTask(task: Task): Promise<void> {
     const alertInput = await this._alertCtrl.create({
-      header: 'Agendar tarefa',
+      header: 'Schedule task',
       inputs: [
         {
           name: 'deadline',
@@ -95,11 +95,11 @@ export class HomePage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Cancel',
           role: 'cancel',
         },
         {
-          text: 'Salvar',
+          text: 'Save',
           handler: async (data) => {
             const updatedTask = { ...task, deadline: data.deadline };
             await this._taskService.update(updatedTask);
@@ -122,17 +122,17 @@ export class HomePage implements OnInit {
       buttons: [
         {
           icon: 'create-outline',
-          text: 'Editar',
+          text: 'Edit',
           handler: () => this.editTaskName(task),
         },
         {
           icon: 'calendar-number-outline',
-          text: 'Agendar',
+          text: 'Schedule',
           handler: () => this.scheduleTask(task),
         },
         {
           icon: 'trash-outline',
-          text: 'Remover',
+          text: 'Remove',
           handler: () => this.removeTask(task),
         },
       ],

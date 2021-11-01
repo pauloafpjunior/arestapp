@@ -14,7 +14,7 @@
           <ion-input
             clearInput
             #autofocus
-            placeholder="Ex. Tomar vacina"
+            placeholder="Ex. Buy milk"
             [(ngModel)]="taskName"
             (keyup.enter)="addTask()"
           ></ion-input>
@@ -23,7 +23,7 @@
         <ion-list class="container" lines="none">
           <ion-item *ngIf="tasks.length === 0">
             <ion-label class="ion-text-center"
-              >Oba, minha lista de tarefas está vazia!</ion-label
+              >Woohoo, my tasks list is empty!</ion-label
             >
           </ion-item>
 
@@ -58,8 +58,8 @@
 
         <ion-item color="light" lines="none">
           <ion-label class="ion-text-center"
-            >© {{ today | date:'yyyy' }} Tarefas - v2.0 |
-            <a href="/about">Sobre</a></ion-label
+            >© {{ today | date:'yyyy' }} ARESTApp - v2.0 |
+            <a href="/about">About</a></ion-label
           >
         </ion-item>
       </ion-col>
