@@ -9,7 +9,7 @@ export class TaskService {
   private readonly STORAGE_KEY: string = 'MY-TASKS';
   private _tasks: Task[] = null;
 
-  constructor(private _storage: Storage) {}
+  constructor(private _storage: Storage) { }
 
   async store(): Promise<void> {
     await this._storage?.set(this.STORAGE_KEY, this._tasks);
@@ -32,9 +32,6 @@ export class TaskService {
   }
 
   async update(task: Task): Promise<void> {
-    console.log(this._tasks)
-
-
     if (this.validateTask(task)) {
       const index = this._tasks.findIndex((item) => item.id === task.id);
 
@@ -43,9 +40,6 @@ export class TaskService {
         await this.store();
       }
     }
-
-    console.log(this._tasks)
-
   }
 
   async remove(taskId: number): Promise<void> {
