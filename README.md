@@ -1,6 +1,6 @@
 # ARESTApp
 
-ARESTApp (A Really Simple Todo App) helps you to manage your tasks list.
+ARESTApp (A Really Simple Todo App) helps you to manage your tasks lists.
 
 # How to use it?
 
